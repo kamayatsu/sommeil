@@ -1,3 +1,86 @@
 // Place all the styles related to the sleeps controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  background: linear-gradient(#000033, #000044, #000055, #000066, #000077, #000088, #000099, #0033CC, #75A9FF, #CCFFFF, #FFCC99);
+  height: 100vh;
+}
+
+.flash {
+  text-align: center
+}
+
+.brand-logo {
+  font-family: 'Caveat', cursive;
+}
+
+.row {
+  margin-bottom: 0 !important;
+}
+
+.card-content {
+  height: 100%;
+}
+
+.card:hover {
+  box-shadow: none;
+
+  .card-content:hover {
+    background-color: #597682 !important;
+  }
+}
+
+.main {
+  height: 525px;
+}
+
+.main2:hover {
+  .card-content:hover {
+    background-color: #546e7a !important;
+  }
+}
+
+.sleep-details {
+  min-height: 525px;
+  padding: 20px 40px;
+}
+
+.tips {
+  font-size: 20px;
+}
+
+.sleep-details:hover {
+  .card-content:hover {
+    background-color: #546e7a !important;
+  }
+}
+
+.last-night {
+  height: 525px;
+  font-family: monospace;
+}
+
+.averate {
+  height: 100px;
+}
+
+.title {
+  width: 20%;
+  float: left;
+  font-size: 24px;
+}
+
+.average-time {
+  font-size: 80px;
+  text-align: center;
+}
+
+.new_title {
+  font-size: 25px;
+  color: white;
+}
+
+input {
+  color: white;
+}
