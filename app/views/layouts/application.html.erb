@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Sommeil</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  </head>
+<head>
+  <title>Sommeil</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-  <body>
-    <nav class="light-blue accent-">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body data-turbolinks="false">
+  <% if flash[:alert] %>
+  <div class="row">
+    <div class="flash col s12 m12 light-blue accent-1">
+      <%= flash[:alert] %>
+    </div>
+  </div>
+  <% end %>
+  <div class="wrapper">
+    <nav class="transparent col s12 m12 z-depth-0">
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Sommeil</a>
+        <a href="/" class="brand-logo light-blue-text text-accent-1">Sommeil</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <% if user_signed_in? %>
           <li><%= link_to "SignOut", destroy_user_session_path, method: :delete %></li>
-          <li><%= link_to "MyPage", user_path(current_user) %></li>
-          <li><%= link_to "New", new_article_path %></li>
+          <li><%= link_to "New", new_user_sleep_path(current_user.id) %></li>
           <% else %>
           <li><%= link_to "SignIn", new_user_session_path %></li>
           <li><%= link_to "SignUp", new_user_registration_path %></li>
@@ -31,5 +40,18 @@
       </div>
     </nav>
     <%= yield %>
-  </body>
+    <% if user_signed_in? %>
+    <% unless request.path.include?("new") %>
+    <div class="col s3">
+      <div class="fixed-action-btn">
+        <%= link_to new_user_sleep_path(current_user.id), class: "btn-floating btn-large waves-effect waves-light blue right" do %>
+        <i class="material-icons">brightness_3</i>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+</body>
+
 </html>
