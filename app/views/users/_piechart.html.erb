@@ -1,0 +1,57 @@
+        <!-- Styles -->
+        <style>
+          #chart2div {
+            width: 100%;
+            height: 300px;
+          }
+        </style>
+
+        <!-- Resources -->
+        <script src="https://www.amcharts.com/lib/4/core.js"></script>
+        <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+        <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+        <!-- Chart code -->
+        <script>
+          am4core.ready(function () {
+
+            // Themes begin
+            am4core.useTheme(am4themes_animated);
+            // Themes end
+
+            // Create chart instance
+            var chart2 = am4core.create("chart2div", am4charts.PieChart);
+
+            // Add data
+            var sleeping_time = '<%= @sleeping_time %>';
+            chart2.data = [{
+              "time": "Sleep",
+              "amount": sleeping_time
+            }, {
+              "time": "Awake",
+              "amount": (24 - sleeping_time)
+            }];
+
+            // Add and configure Series
+            var pieSeries = chart2.series.push(new am4charts.PieSeries());
+            pieSeries.labels.template.disabled =
+              true;
+            pieSeries.dataFields.value = "amount";
+            pieSeries.dataFields.category = "time";
+            pieSeries.slices
+              .template.stroke = am4core.color("#fff");
+            pieSeries.slices.template.strokeWidth = 2;
+            pieSeries.slices
+              .template.strokeOpacity = 1;
+
+            // This creates initial animation
+            pieSeries.hiddenState.properties.opacity = 1;
+            pieSeries.hiddenState.properties.endAngle = -90;
+            pieSeries
+              .hiddenState.properties.startAngle = -90;
+
+          }); // end am4core.ready()
+        </script>
+
+        <!-- HTML -->
+        <div id="chart2div"></div>

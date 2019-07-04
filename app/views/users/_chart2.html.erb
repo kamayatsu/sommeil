@@ -1,0 +1,145 @@
+          <!-- Styles -->
+          <style>
+            #chartdiv {
+              width: 100%;
+              height: 500px;
+              font-size: 20px;
+            }
+          </style>
+
+          <!-- Resources -->
+          <script src="https://www.amcharts.com/lib/4/core.js"></script>
+          <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+          <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+          <!-- Chart code -->
+          <script>
+            am4core.ready(function () {
+
+              // Themes begin
+              am4core.useTheme(am4themes_animated);
+              // Themes end
+
+              // Create chart instance
+              var chart = am4core.create("chartdiv", am4charts.XYChart);
+              //chart.scrollbarX = new am4core.Scrollbar();
+
+              // Add data
+              var sleeping_times = '<%= @sleeping_times %>'.replace(/\[/g, "").replace(/\]/g, "").split(',');
+              var dates = '<%= @dates %>'.replace(/\[/g, "").replace(/\]/g, "").replace(/\s/g, "").split(',');
+              var sleep_ids = '<%= @sleep_ids %>'.replace(/\[/g, "").replace(/\]/g, "").replace(/\s/g, "").split(
+                ',');
+              console.log(sleep_ids);
+
+              chart.data = [{
+                "day": dates[0],
+                "time": sleeping_times[0],
+                "id": sleep_ids[0]
+              }, {
+                "day": dates[1],
+                "time": sleeping_times[1],
+                "id": sleep_ids[1]
+              }, {
+                "day": dates[2],
+                "time": sleeping_times[2],
+                "id": sleep_ids[2]
+              }, {
+                "day": dates[3],
+                "time": sleeping_times[3],
+                "id": sleep_ids[3]
+              }, {
+                "day": dates[4],
+                "time": sleeping_times[4],
+                "id": sleep_ids[4]
+              }, {
+                "day": dates[5],
+                "time": sleeping_times[5],
+                "id": sleep_ids[5]
+              }, {
+                "day": dates[6],
+                "time": sleeping_times[6],
+                "id": sleep_ids[6]
+              }, {
+                "day": dates[7],
+                "time": sleeping_times[7],
+                "id": sleep_ids[7]
+              }, {
+                "day": dates[8],
+                "time": sleeping_times[8],
+                "id": sleep_ids[8]
+              }, {
+                "day": dates[9],
+                "time": sleeping_times[9],
+                "id": sleep_ids[9]
+              }, {
+                "day": dates[10],
+                "time": sleeping_times[10],
+                "id": sleep_ids[10]
+              }, {
+                "day": dates[11],
+                "time": sleeping_times[11],
+                "id": sleep_ids[11]
+              }, {
+                "day": dates[12],
+                "time": sleeping_times[12],
+                "id": sleep_ids[12]
+              }, {
+                "day": dates[13],
+                "time": sleeping_times[13],
+                "id": sleep_ids[13]
+              }];
+
+              // Create axes
+              var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+              categoryAxis.dataFields.category = "day";
+              categoryAxis.renderer.grid.template.location = 0;
+              categoryAxis.renderer.minGridDistance = 30;
+              categoryAxis.renderer.labels.template.horizontalCenter = "middle";
+              categoryAxis.renderer.labels.template.verticalCenter = "middle";
+              categoryAxis.renderer.labels.template.rotation = 0;
+              categoryAxis.renderer.labels.template.fill = am4core.color("#fff");
+              categoryAxis.tooltip.disabled = true;
+              categoryAxis.renderer.minHeight = 110;
+
+              var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+              valueAxis.renderer.minWidth = 50;
+              valueAxis.renderer.labels.template.fill = am4core.color("#fff");
+
+              // Create series
+              var series = chart.series.push(new am4charts.ColumnSeries());
+              series.sequencedInterpolation = true;
+              series.dataFields.valueY = "time";
+              series.dataFields.categoryX = "day";
+              series.tooltipText = "[{categoryX}: bold]{valueY}[/]";
+              series.columns.template.strokeWidth = 0;
+
+              series.tooltip.pointerOrientation = "vertical";
+
+              //Go to detail page
+              var current_user_id = '<%= @user.id %>'
+              series.columns.template.url =
+                `http://localhost:3000/users/${current_user_id}/sleeps/{id.urlEncode()}`;
+
+              series.columns.template.column.cornerRadiusTopLeft = 10;
+              series.columns.template.column.cornerRadiusTopRight = 10;
+              series.columns.template.column.fillOpacity = 0.8;
+
+              // on hover, make corner radiuses bigger
+              var hoverState = series.columns.template.column.states.create("hover");
+              //hoverState.properties.cornerRadiusTopLeft = 0;
+              //hoverState.properties.cornerRadiusTopRight = 0;
+              hoverState.properties.fillOpacity = 1;
+
+              series.columns.template.adapter.add("fill", function (fill, target) {
+                return chart.colors.getIndex(target.dataItem.index);
+              });
+
+              // Cursor
+              chart.cursor = new am4charts.XYCursor();
+              chart.cursor.lineX.disabled = true;
+
+            }); // end am4core.ready()
+          </script>
+
+          <!-- HTML -->
+          <div id="chartdiv"></div>
