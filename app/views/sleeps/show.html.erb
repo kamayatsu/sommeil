@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col s12 m12">
+    <% if @sleep.present? %>
+    <div class="sleep-details card horizontal blue-grey darken-1 white-text">
+      <div class="col s12 m3">
+        <div class="card-title">
+          <h5><%= @sleep.date.strftime("%Y / %m / %d") %></h5>
+        </div>
+        <div class="slept_time">
+          <%= "slept　: #{@sleep.slept_time.strftime("%H : %M")}"  %>
+        </div>
+        <div class="wakeup_time">
+          <%= "awake : #{@sleep.wakeup_time.strftime("%H : %M")}" %>
+        </div>
+        <% sleeping_time = ((@sleep.wakeup_time - @sleep.slept_time) /3600.0) %>
+        <% if sleeping_time < 0 %>
+        <% @sleeping_time = 24.0 + sleeping_time %>
+        <% else %>
+        <% @sleeping_time = sleeping_time %>
+        <% end %>
+        <%= render "/users/piechart"%>
+      </div>
+      <div class="card-stacked">
+        <div class="card-title">
+          <% if @sleeping_time < 5 %>
+          <h4>Oh no... You could not sleep well.</h4>
+          <% elsif @sleeping_time < 6 %>
+          <h4>You should sleep a little longer.</h4>
+          <% elsif @sleeping_time < 7 %>
+          <h4>So so.</h4>
+          <% elsif @sleeping_time < 8 %>
+          <h4>Good !! Have a nice day !!</h4>
+          <% else %>
+          <h4>Wonderful !!!</h4>
+          <% end %>
+        </div>
+        <div class="card-content">
+          <p class="tips">Tips</p>
+          <p class="tips">I am a very simple card. I am good at containing small bits of information.</p>
+        </div>
+        <div class="card-action">
+          <%= link_to "Edit", edit_user_sleep_path %>
+          <%= link_to "Delete", user_sleep_path, method: :delete, data: { confirm: '削除しますか？'} %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>

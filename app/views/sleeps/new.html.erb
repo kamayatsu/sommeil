@@ -1,0 +1,47 @@
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var options = {
+      defaultDate: new Date(),
+      setDefaultDate: true
+    };
+    var elems = document.querySelectorAll('.datepicker');
+    var instances = M.Datepicker.init(elems, options);
+    //methods
+    //instance.setDate(new Date());
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var time_options = {
+      twelveHour: false,
+      defaultTime: '0:00'
+    }
+    var time_elems = document.querySelectorAll('.timepicker');
+    var time_instances = M.Timepicker.init(time_elems, time_options);
+    //methods
+    //var time_instance = M.Timepicker.getInstance(time_elem);
+  });
+</script>
+
+<div class="row">
+  <div class="col s12 m2">
+    <div class="new_title">Tell me about your last night</div>
+    <%= form_for [@user, @sleep] do |f|  %>
+    <div class="input-field1">
+      <%= f.text_field :slept_time, placeholder: "slept_time", class: "timepicker" %>
+    </div>
+    <div class="input-field2">
+      <%= f.text_field :wakeup_time, placeholder: "wakeup_time", class: "timepicker" %>
+    </div>
+    <div class="input-field">
+      <%= f.text_field :date, placeholder: "date", class: "datepicker" %>
+    </div>
+    <div id="send1">
+      <%= f.submit "Send", class: "btn" %>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="col s12 m8">
+    <%= render "howlonghours" %>
+  </div>
+</div>
