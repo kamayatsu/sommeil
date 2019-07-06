@@ -10,7 +10,8 @@
           <% time = 24.0 + time if time < 0 %>
           <% total_time += time %>
           <% end %>
-          <% average_time = (total_time / 7).round(2) %>
+          <% @sleeps.present? ? (length = @sleeps.length) : (length = 1) %>
+          <% average_time = (total_time / length).round(2) %>
           <%= "#{average_time.to_i} h #{((average_time % 1).round(2) * 60).round} m" %>
         </div>
       </div>
