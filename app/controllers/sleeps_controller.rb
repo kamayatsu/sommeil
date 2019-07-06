@@ -30,6 +30,8 @@ class SleepsController < ApplicationController
   def edit
     @user = User.find(current_user.id)
     @sleep = Sleep.find(params[:id])
+    @sleep.slept_time = @sleep.slept_time.strftime("%H:%M")
+    @sleep.wakeup_time = @sleep.wakeup_time.strftime("%H:%M")
   end
 
   def update
