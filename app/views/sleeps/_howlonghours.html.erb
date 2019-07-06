@@ -40,7 +40,7 @@
               startTime: slept_time,
               endTime: 24
             }];
-          } else if (slept_time == 0) {
+          } else if ((slept_time == 0) || (slept_time > 0) && (slept_time <= 8)) {
             chart.data = [{
               category: "",
               startTime: slept_time,
