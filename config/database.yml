@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: sommeil_production
-  username: sommeil
-  password: <%= ENV['SOMMEIL_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
