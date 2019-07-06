@@ -23,19 +23,19 @@
       <div class="card-stacked">
         <% if @sleeping_time < 5 %>
         <% card_title = "Oh no... You could not sleep well."%>
-        <% card_content = "I am a very simple card. I am good at containing small bits of information."%>
+        <% card_content = "睡眠時間が6時間以下の場合、7〜8時間の場合に比べて死亡率が2.4倍ほど高くなるという報告もあります。きちんと睡眠を取りましょう。"%>
         <% elsif @sleeping_time < 6 %>
         <% card_title = "You should sleep a little longer."%>
-        <% card_content = "I am a very simple card. I am good at containing small bits of information."%>
+        <% card_content = "睡眠不足は免疫力低下、老化促進、精神病のリスク増加など良いことがありません。きちんと睡眠を取りましょう。"%>
         <% elsif @sleeping_time < 7 %>
         <% card_title = "So so."%>
-        <% card_content = "I am a very simple card. I am good at containing small bits of information."%>
+        <% card_content = "ある程度睡眠時間を取れていますが、あくまで最低限です。もう少し眠る時間を取れるよう、日々の生活を改善していきましょう！"%>
         <% elsif @sleeping_time < 8 %>
         <% card_title = "Good !! Have a nice day !!"%>
-        <% card_content = "I am a very simple card. I am good at containing small bits of information."%>
+        <% card_content = "とても良い睡眠が取れています。この調子で継続していきましょう！"%>
         <% else %>
         <% card_title = "Wonderful !!!"%>
-        <% card_content = "I am a very simple card. I am good at containing small bits of information."%>
+        <% card_content = "完璧です。続けていきましょう！ただし、寝過ぎは要注意です！"%>
         <% end %>
 
         <div class="card-title">
