@@ -32,11 +32,27 @@
         <a href="/" class="brand-logo light-blue-text text-accent-1">Sommeil</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <% if user_signed_in? %>
-          <li><%= link_to "SignOut", destroy_user_session_path, method: :delete %></li>
-          <li><%= link_to "New", new_user_sleep_path(current_user.id) %></li>
+          <li>
+            <%= link_to destroy_user_session_path, method: :delete do %>
+            <i class="material-icons">exit_to_app</i>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_user_sleep_path(current_user.id) do %>
+            <i class="material-icons">brightness_3</i>
+            <% end %>
+          </li>
           <% else %>
-          <li><%= link_to "SignIn", new_user_session_path %></li>
-          <li><%= link_to "SignUp", new_user_registration_path %></li>
+          <li>
+            <%= link_to new_user_session_path do %>
+            <i class="material-icons">person</i>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to new_user_registration_path do %>
+            <i class="material-icons">person_add</i>
+            <% end %>
+          </li>
           <% end %>
         </ul>
       </div>
