@@ -21,23 +21,31 @@
         <%= render "/users/piechart"%>
       </div>
       <div class="card-stacked">
+        <% if @sleeping_time < 5 %>
+        <% card_title = "Oh no... You could not sleep well."%>
+        <% card_content = "I am a very simple card. I am good at containing small bits of information."%>
+        <% elsif @sleeping_time < 6 %>
+        <% card_title = "You should sleep a little longer."%>
+        <% card_content = "I am a very simple card. I am good at containing small bits of information."%>
+        <% elsif @sleeping_time < 7 %>
+        <% card_title = "So so."%>
+        <% card_content = "I am a very simple card. I am good at containing small bits of information."%>
+        <% elsif @sleeping_time < 8 %>
+        <% card_title = "Good !! Have a nice day !!"%>
+        <% card_content = "I am a very simple card. I am good at containing small bits of information."%>
+        <% else %>
+        <% card_title = "Wonderful !!!"%>
+        <% card_content = "I am a very simple card. I am good at containing small bits of information."%>
+        <% end %>
+
         <div class="card-title">
-          <% if @sleeping_time < 5 %>
-          <h4>Oh no... You could not sleep well.</h4>
-          <% elsif @sleeping_time < 6 %>
-          <h4>You should sleep a little longer.</h4>
-          <% elsif @sleeping_time < 7 %>
-          <h4>So so.</h4>
-          <% elsif @sleeping_time < 8 %>
-          <h4>Good !! Have a nice day !!</h4>
-          <% else %>
-          <h4>Wonderful !!!</h4>
-          <% end %>
+          <h4><%= card_title %></h4>
         </div>
         <div class="card-content">
           <p class="tips">Tips</p>
-          <p class="tips">I am a very simple card. I am good at containing small bits of information.</p>
+          <p class="tips"><%= card_content %></p>
         </div>
+
         <div class="card-action">
           <%= link_to "Edit", edit_user_sleep_path %>
           <%= link_to "Delete", user_sleep_path, method: :delete, data: { confirm: '削除しますか？'} %>
