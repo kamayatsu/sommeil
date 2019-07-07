@@ -2,7 +2,7 @@ class Sleep < ApplicationRecord
   belongs_to :user
   validates :slept_time, presence: true
   validates :wakeup_time, presence: true
-  validate :dates_cannnot_be_registered_if_there_is_no_yesterdays_date, on: [:create]
+  validate :dates_cannnot_be_registered_if_there_is_no_yesterdays_date
 
   def dates_cannnot_be_registered_if_there_is_no_yesterdays_date
     return if date.present? && user.sleeps.blank?
